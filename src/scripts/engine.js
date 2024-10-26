@@ -77,10 +77,7 @@ async function setCardField(cardId) {
     state.fieldCards.player.style.display = 'block';
     state.fieldCards.computer.style.display = 'block';
 
-    state.cardSprites.avatar.src = "";
-    state.cardSprites.name.innerText = "";
-    state.cardSprites.type.innerText = "";
-    
+  
     state.fieldCards.player.src = cardData[cardId].img;
     state.fieldCards.computer.src = cardData[computerCardId].img;
 
@@ -142,6 +139,10 @@ async function resetDuel() {
 
     state.fieldCards.player.style.display ='none'
     state.fieldCards.computer.style.display ='none'
+    state.cardSprites.avatar.src = "";
+    state.cardSprites.name.innerText = "";
+    state.cardSprites.type.innerText = "";
+    
     init()
 }
 async function playAudio(status) {
@@ -149,8 +150,8 @@ async function playAudio(status) {
     try {
         audio.play()
         
-    } catch (e) {
-        
+    } catch(e){
+        e.message()
     }
 }
 function init(){
@@ -159,5 +160,7 @@ function init(){
     state.fieldCards.computer.style.display ='none'
     drawCards(5,playerSide.player1);
     drawCards(5,playerSide.computer);
+    const bgm = document.getElementById('bgm')
+    bgm.play()
 }
 init();

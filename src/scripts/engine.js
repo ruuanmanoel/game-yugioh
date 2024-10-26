@@ -72,9 +72,14 @@ async function createCardImage(idCard, fieldSide) {
 async function setCardField(cardId) {
     await removeAllCardsImage();
     let computerCardId = await getRandomCardId();
+    
 
     state.fieldCards.player.style.display = 'block';
     state.fieldCards.computer.style.display = 'block';
+
+    state.cardSprites.avatar.src = "";
+    state.cardSprites.name.innerText = "";
+    state.cardSprites.type.innerText = "";
     
     state.fieldCards.player.src = cardData[cardId].img;
     state.fieldCards.computer.src = cardData[computerCardId].img;
@@ -149,6 +154,9 @@ async function playAudio(status) {
     }
 }
 function init(){
+    
+    state.fieldCards.player.style.display ='none'
+    state.fieldCards.computer.style.display ='none'
     drawCards(5,playerSide.player1);
     drawCards(5,playerSide.computer);
 }

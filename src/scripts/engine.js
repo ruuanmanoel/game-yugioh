@@ -9,9 +9,9 @@ const state={
         name: document.getElementById('card-name'),
         type: document.getElementById('card-type')
     },
-    fieldCard:{
-        player: document.getElementById('player-field-card'),
-        computer: document.getElementById('computer-field-card'),
+    fieldCards:{
+        player: document.getElementById('player-infield-card'),
+        computer: document.getElementById('computer-infield-card'),
     },
     actions:{
         button: document.getElementById('next-duel'),
@@ -79,7 +79,22 @@ async function setCardField(cardId) {
     state.fieldCards.player.src = cardData[cardId].img;
     state.fieldCards.computer.src = cardData[computerCardId].img;
 
-    let duelResults = await checkDuelResults(cardId, computerCardId)
+    let duelResults = await checkDuelResults(cardId, computerCardId);
+
+    await updateScore();
+    await drawButon();
+}
+async function removeAllCardsImage() {
+    let cards = document.querySelector('.card-box.framed#computer-cards');
+    let imgElements = cards.querySelectorAll('img');
+    imgElements.forEach((img)=>{
+        img.remove();
+    })
+    cards = document.querySelector('.card-box.framed#player-cards');
+    imgElements = cards.querySelectorAll('img');
+    imgElements.forEach((img)=>{
+        img.remove();
+    })
 }
 async function drawSelectCard(index) {
     state.cardSprites.avatar.src = cardData[index].img;
